@@ -113,13 +113,70 @@
                 </div>
                 <div class="col-xs-12 col-sm-2">
                     <p style="padding:40px;"></p>
-                    <a type="button" class="btn btn-warning btn-block" data-toggle="tooltip" title="Or Call us at +852 12345678" data-placement="bottom" href="#reserveform">Reserve Table</a>
+                    <a  data-toggle="modal" data-target="#tableModal" type="button" id="reserveButton" class="btn btn-warning btn-block">Reserve Table</a>
                 </div>
             </div>
         </div>
     </header>
 
     <div class="container">
+        <div class="row row-content">
+            <div class="col-xs-12">
+                <div id="mycarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                    <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#mycarousel" data-slide-to="1"></li>
+                    <li data-target="#mycarousel" data-slide-to="2"></li>
+                </ol>
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <img class="img-responsive" src="img/uthappizza.png" alt="Uthapizza">
+                            <div class="carousel-caption">
+                                <h2>Uthappizza <span class="label label-danger label-xs">Hot</span> <span class="badge">$4.99</span></h2>
+                                <p>A unique combination of Indian Uthappam (pancake) and
+                                  Italian pizza, topped with Cerignola olives, ripe vine
+                                  cherry tomatoes, Vidalia onion, Guntur chillies and
+                                  Buffalo Paneer.</p>
+                                <p><a class="btn btn-primary btn-xs" href="#">More &raquo;</a></p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="img/buffet.png" alt="Weekend Grand Buffet">
+                            <div class="carousel-caption">
+                                <h2>Weekend Grand Buffet <span class="label label-danger label-xs">New</span> </h2>
+                                <p>Featuring mouthwatering combinations with a choice of five different salads, six enticing appetizers, six main entrees and five choicest desserts. Free flowing bubbly and soft drinks. All for just $19.99 per person </p>
+                                <p><a class="btn btn-primary btn-xs" href="#">More &raquo;</a></p>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="img/alberto.png" alt="Alberto Somayya">
+                            <div class="carousel-caption">
+                                <h2>Alberto Somayya</h2>
+                                <h4>Executive Chef</h4>
+                                <p>Award winning three-star Michelin chef with wide
+                                 International experience having worked closely with
+                                 whos-who in the culinary world, he specializes in
+                                  creating mouthwatering Indo-Italian fusion experiences.
+                                 </p>
+                                <p><a class="btn btn-primary btn-xs" href="#">More &raquo;</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#mycarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#mycarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
         <div class="row row-content">
             <div class="col-xs-12 col-sm-3 col-sm-push-9">
                 <p style="padding:20px;"></p>
@@ -194,55 +251,89 @@
             </div>
         </div>
         
-        <div class="row row-content" id="reserveform">
-            <div class="col-xs-12 col-sm-3">
-                <p style="padding:20px;"></p>
-                <h3 align=center>Reserve a Table</h3>
-            </div>
-            <div class="col-xs-12 col-sm-9">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label for="numberOfGuestsRadio" class="col-sm-2 control-label">Number of Guests</label>
-                        <label class="radio-inline">
-                            <input type="radio" name="numberOfGuestsRadio" id="numberOfGuestsRadio01" value=""> 1
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="numberOfGuestsRadio" id="numberOfGuestsRadio02" value=""> 2
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="numberOfGuestsRadio" id="numberOfGuestsRadio03" value=""> 3
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="numberOfGuestsRadio" id="numberOfGuestsRadio04" value=""> 4
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="numberOfGuestsRadio" id="numberOfGuestsRadio05" value=""> 5
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="numberOfGuestsRadio" id="numberOfGuestsRadio06" value=""> 6
-                        </label>
-                    </div>
-                    <div class="form-group has-feedback">
-                        <label for="dateInput" class="col-sm-2 control-label">Date and Time</label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control" id="dateInput" name="dateInput" placeholder="Date">
+    </div>
+    
+    <div id="tableModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Reserve Table </h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="numberOfGuests" class="col-sm-2 control-label">Number of Guests</label>
+                            <div class="col-sm-10">
+                            <label class="radio-inline">
+                              <input type="radio" name="numberOfGuests" id="numberOfGuests1" value="option1" checked> 1
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="numberOfGuests" id="numberOfGuests2" value="option2"> 2
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="numberOfGuests" id="numberOfGuests3" value="option3"> 3
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="numberOfGuests" id="numberOfGuests4" value="option4"> 4
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="numberOfGuests" id="numberOfGuests5" value="option5"> 5
+                            </label>
+                            <label class="radio-inline">
+                              <input type="radio" name="numberOfGuests" id="numberOfGuests6" value="option6"> 6
+                            </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nonSmoking" class="col-sm-2 control-label">Section</label>
+                            <div class="col-sm-10">
+                                <div class="btn-group" data-toggle="buttons">
+                                  <label class="btn btn-success active">
+                                    <input type="radio" name="nonSmoking" id="nonSmoking1" autocomplete="off" checked> Non-Smoking
+                                  </label>
+                                  <label class="btn btn-danger">
+                                    <input type="radio" name="nonSmoking" id="nonSmoking2" autocomplete="off"> Smoking
+                                  </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            <label for="date" class="col-sm-2 control-label">Date and Time</label>
+                            <div class="col-sm-4">
+                            <input type="text" class="form-control" id="Date" placeholder="Date">
                             <span class="glyphicon glyphicon-calendar form-control-feedback" aria-hidden="true"></span>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" id="TimeInput" placeholder="Time">
+                                <span class="glyphicon glyphicon-time form-control-feedback" aria-hidden="true"></span>
+                            </div>
                         </div>
-                        <div class="col-sm-3 col-sm-offset-1">
-                            <input type="text" class="form-control" id="timeInput" name="timeInput" placeholder="Time">
-                            <span class="glyphicon glyphicon-time form-control-feedback" aria-hidden="true"></span>
+
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <button type="submit" class="btn btn-primary">Reserve</button>
+                                <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-primary">Reserve</button>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="alert alert-warning alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <strong>Warning</strong>: Please
+                                    <a href="tel:+85287654321" class="alert-link">call</a> us to reserve for more than six guests.
+                                </div>  
+                            </div>
                         </div>
-                    </div>
-                    <div class="alert alert-warning alert-dismissible" role="alert">
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <strong>Warning!</strong> Please <a href="tel:+85212345678" class="alert-link">call</a> us to reserve for more than six guests.
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -293,9 +384,9 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function(){
-        $('[data-toggle="tooltip"]').tooltip();
-         });
+//        $('#reserveButton').on('toggle', function () {
+//            $('#tableModal').modal('show')
+//        })
     </script>
 </body>
 
