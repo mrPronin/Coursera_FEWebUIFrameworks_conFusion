@@ -8,7 +8,7 @@ angular.module('confusionApp')
             $scope.filtText = '';
             $scope.showDetails = false;
 
-            $scope.dishes=menuFactory.getDishes();
+            $scope.dishes= menuFactory.getDishes();
                         
             $scope.select = function(setTab) {
                 $scope.tab = setTab;
@@ -69,24 +69,45 @@ angular.module('confusionApp')
 
         .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
 
-            var order = '';
             var dish= menuFactory.getDish(parseInt($stateParams.id,10));
+            
             $scope.dish = dish;
             
         }])
 
         .controller('DishCommentController', ['$scope', function($scope) {
-            $scope.newComment = {rating:"5", comment:"", author:"", date:""};
+            
+            $scope.mycomment = {rating:5, comment:"", author:"", date:""};
+            
             $scope.submitComment = function () {
                 
-                $scope.newComment.date = new Date().toISOString();
+                $scope.mycomment.date = new Date().toISOString();
+                console.log($scope.mycomment);
                 
-                $scope.dish.comments.push($scope.newComment);
+                $scope.dish.comments.push($scope.mycomment);
                 
                 $scope.commentForm.$setPristine();
                 
-                $scope.newComment = {rating:"5", comment:"", author:"", date:""};
+                $scope.mycomment = {rating:5, comment:"", author:"", date:""};
             }
+        }])
+
+        .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory) {
+            
+            var featuredDishID = 0;
+            $scope.featuredDish = menuFactory.getDish(featuredDishID);
+            
+            $scope.promotion = menuFactory.getPromotion(0);
+            
+            var executiveChefID = 3;
+            $scope.executiveChef = corporateFactory.getLeader(executiveChefID);
+
+        }])
+
+        .controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
+            
+            $scope.leadership = corporateFactory.getLeaders();
+            
         }])
 
 ;
