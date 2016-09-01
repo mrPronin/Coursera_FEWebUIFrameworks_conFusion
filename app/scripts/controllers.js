@@ -53,7 +53,7 @@ angular.module('confusionApp')
                 
                 console.log($scope.feedback);
                 
-                if ($scope.feedback.agree && ($scope.feedback.mychannel == "")) {
+                if ($scope.feedback.agree && ($scope.feedback.mychannel === "")) {
                     $scope.invalidChannelSelection = true;
                     console.log('incorrect');
                 }
@@ -89,7 +89,7 @@ angular.module('confusionApp')
                 $scope.commentForm.$setPristine();
                 
                 $scope.mycomment = {rating:5, comment:"", author:"", date:""};
-            }
+            };
         }])
 
         .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory) {
