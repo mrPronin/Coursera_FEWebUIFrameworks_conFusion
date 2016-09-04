@@ -17,7 +17,8 @@ angular.module('confusionApp')
                 },
                 function(response) {
                     $scope.message = "Error: "+response.status + " " + response.statusText;
-                });
+                }
+            );
                         
             $scope.select = function(setTab) {
                 $scope.tab = setTab;
@@ -56,22 +57,25 @@ angular.module('confusionApp')
                         
         }])
 
-        .controller('FeedbackController', ['$scope', function($scope) {
+        .controller('FeedbackController', ['$scope', 'feedbackFactory', function($scope, feedbackFactory) {
             
             $scope.sendFeedback = function() {
                 
-                console.log($scope.feedback);
+//                console.log($scope.feedback);
                 
                 if ($scope.feedback.agree && ($scope.feedback.mychannel === "")) {
                     $scope.invalidChannelSelection = true;
                     console.log('incorrect');
                 }
                 else {
+                    
+                    feedbackFactory.saveFeedback().save($scope.feedback);
+                    
                     $scope.invalidChannelSelection = false;
                     $scope.feedback = {mychannel:"", firstName:"", lastName:"", agree:false, email:"" };
                     $scope.feedback.mychannel="";
                     $scope.feedbackForm.$setPristine();
-                    console.log($scope.feedback);
+//                    console.log($scope.feedback);
                 }
             };
         }])
@@ -100,7 +104,7 @@ angular.module('confusionApp')
             $scope.submitComment = function () {
                 
                 $scope.mycomment.date = new Date().toISOString();
-                console.log($scope.mycomment);
+//                console.log($scope.mycomment);
                 
                 $scope.dish.comments.push($scope.mycomment);
                 
@@ -115,7 +119,14 @@ angular.module('confusionApp')
         .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory) {
             
             $scope.showDish = false;
-            $scope.message="Loading ...";
+            $scope.message="Loading dishes data...";
+            
+            $scope.showPromotion = false;
+            $scope.promotionMessage = "Loading promotions data..."
+            
+            $scope.showExecutiveChef = false;
+            $scope.executiveChefMessage = "Loading leadership data..."
+            
             $scope.dish = menuFactory.getDishes().get({id:0})
             .$promise.then(
                 function(response){
@@ -123,20 +134,47 @@ angular.module('confusionApp')
                     $scope.showDish = true;
                 },
                 function(response) {
-                    $scope.message = "Error: "+response.status + " " + response.statusText;
+                    $scope.message = "Dishes data fetching error: "+response.status + " " + response.statusText;
                 }
             );
             
-            $scope.promotion = menuFactory.getPromotion(0);
+            $scope.promotion = menuFactory.getPromotion().get({id:0})
+            .$promise.then(
+                function(response){
+                    $scope.promotion = response;
+                    $scope.showPromotion = true;
+                },
+                function(response){
+                    $scope.promotionMessage = "Promotions data fetching error: "+response.status + " " + response.statusText;
+                }
+            );
             
-            var executiveChefID = 3;
-            $scope.executiveChef = corporateFactory.getLeader(executiveChefID);
+            $scope.executiveChef = corporateFactory.getLeaders().get({id:3})
+            .$promise.then(
+                function(response){
+                    $scope.executiveChef = response;
+                    $scope.showExecutiveChef = true;
+                },
+                function(response){
+                    $scope.executiveChefMessage = "Leadership data fetching error: "+response.status + " " + response.statusText;
+                }
+            );
 
         }])
 
         .controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
             
-            $scope.leadership = corporateFactory.getLeaders();
+            $scope.showLeadership = false;
+            $scope.message = "Loading leadership data...";
+            corporateFactory.getLeaders().query(
+                function(response) {
+                    $scope.leadership = response;
+                    $scope.showLeadership = true;
+                },
+                function(response) {
+                    $scope.message = "Leadership data fetching error: "+response.status + " " + response.statusText;
+                }
+            );
             
         }])
 
